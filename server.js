@@ -16,10 +16,10 @@ require("firebase/firestore");
   // Set the configuration for your app
   // TODO: Replace with your project's config object
   var config = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    storageBucket: ""
+    apiKey: "AIzaSyCzX8sKSTnJXEMCw_Q3MzJviP7Xr4U6kEI",
+    authDomain: "furniture-store-c3d57.firebaseapp.com",
+    databaseURL: "https://furniture-store-c3d57-default-rtdb.firebaseio.com/",
+    storageBucket: "furniture-store-c3d57.appspot.com"
   };
   firebase.initializeApp(config);
   // Get a reference to the database service
@@ -75,6 +75,7 @@ require("firebase/firestore");
     firebase.database().ref('orders').push(firebase.auth().currentUser.uid);
 
     firebase.database().ref('orders').child(firebase.auth().currentUser.uid).set({
+      email:email,
       items: cart
     });
       console.log('signup success');
@@ -99,8 +100,8 @@ app.get('/login.html', function(req, res){
     res.sendFile(__dirname + '/login.html');
 } );
 
-app.get('/signup.html', function(req, res){
-    res.sendFile(__dirname + '/signup.html');
+app.post('/signup.html', function(req, res){
+    res.sendFile(__dirname + '/public/signup.html');
 } );
 
 
