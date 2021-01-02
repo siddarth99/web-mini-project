@@ -22,16 +22,17 @@
                           <div class="row">
                               <div class="col-lg-10 col-md-12 mx-auto">
                                   <div class="logo-cover">
-                                       <img src="public\images\logo.svg" alt="">
+                                       <img src="images\logo.svg" alt="">
                                    </div>
                                     <div class="form-cover">
-										<h6>Login Here</h6>
+										<h4>Login Here</h4>
 										<form action="/auth" method="POST">
-                                         <input placeholder="Enter email" type="text" class="form-control">
-                                         <input Placeholder="Enter password" type="password" class="form-control">
+                                         <input placeholder="Enter email" id='email' name='email' type="text" class="form-control">
+                                         <input Placeholder="Enter password" id='password' name='password' type="password" class="form-control">
                                          <div class="row form-footer">
                                              <div class="col-md-6 forget-paswd">
-												<button formaction="/signup" formmethod="GET" id='signup_button' type="submit">Sign Up</button>
+                                                <button formaction="./signup.html" class='btn btn-primary' formmethod="POST" 
+                                                id='signup_button' type="submit">No Account?</button>
                                              </div>
                                              <div class="col-md-6 button-div">
                                                  <button type ="submit" class="btn btn-primary">Login</button>

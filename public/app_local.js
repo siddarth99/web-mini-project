@@ -37,7 +37,6 @@ function login_data(){
   const http = new XMLHttpRequest();
   var uri = '/store_cart'
   cart = Storage.getCart();
-  window.alert("cart" +cart_items);
   http.open('POST', uri);
   http.onreadystatechange = function(){
     if(this.status == 200 && this.readyState == 4){
@@ -61,7 +60,6 @@ class Products {
       // console.log(data);
       data = JSON.parse(data);
       let products = data.items;
-      window.alert(products);
       products = products.map(item => {
         const { title, price } = item.fields;
         const { id } = item.sys;
@@ -188,17 +186,16 @@ class UI {
     checkoutCartBtn.addEventListener("click", () => {
       var xhr = new XMLHttpRequest();
       const uri = '/store_cart';
-      cart = Storage.getCart();
-      window.alert(cart);
+      cart_items = Storage.getCart();
       xhr.open('POST', uri);
-      xhr.setRequestHeader("Content-Type", "application/jason");
+      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function(){
       if(this.status == 200 && this.readyState == 4){
         state = xhr.response;
       }
     };
-      var data = JSON.stringify(cart);
-      xhr.send(data)
+      var data = JSON.stringify(cart_items);
+      xhr.send(data);
       this.checkout();
     });
     cartContent.addEventListener("click", event => {

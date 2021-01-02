@@ -85,10 +85,7 @@ body{
     font-family: 'Ubuntu', sans-serif;
    color: #6A6A6A;
    overflow-x: hidden;
-
 }
-
-
 
 .bg-login{
     background-image: url(../images/woodcrony-slide-4.jpg);
@@ -123,7 +120,7 @@ body{
 .logo-cover img{
     margin-bottom: 30px;
 }
-.form-cover h6{
+.form-cover h3{
     margin-bottom: 30px;
 }
 .form-cover input{
