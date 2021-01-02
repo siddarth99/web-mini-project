@@ -15,13 +15,13 @@ const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 let cart = [];
 var data = ' ';
+var cart_items = '';
 const http = new XMLHttpRequest();
 const url = '/data';
 http.open('GET', url);
 http.send();
 var cont = 0;
 http.responseType = 'application/json';
-
 http.onreadystatechange = function(){
   if(this.status == 200 && this.readyState == 4){
     setdata(http.response);
@@ -30,13 +30,23 @@ http.onreadystatechange = function(){
 
 function setdata(dat){
   data = dat;
-  window.alert("func");
-  window.alert(data);
   main();
 }
 
-window.alert('out');
-window.alert(data);
+function login_data(){
+  const http = new XMLHttpRequest();
+  var uri = '/store_cart'
+  cart = Storage.getCart();
+  window.alert("cart" +cart_items);
+  http.open('POST', uri);
+  http.onreadystatechange = function(){
+    if(this.status == 200 && this.readyState == 4){
+      state = http.response;
+    }
+  };
+  var data = JSON.stringify(cart);
+  http.send(data);
+}
 
 // products
 class Products {
@@ -49,8 +59,6 @@ class Products {
       // });
       // console.log(contentful.items);
       // console.log(data);
-      window.alert("products");
-      window.alert(data);
       data = JSON.parse(data);
       let products = data.items;
       window.alert(products);
@@ -136,6 +144,7 @@ class UI {
   addCartItem(item) {
     const div = document.createElement("div");
     div.classList.add("cart-item");
+    cart_items += item.title;
     div.innerHTML = `<!-- cart item -->
             <!-- item image -->
             <img src=${item.image} alt="product" />
@@ -177,6 +186,19 @@ class UI {
   }
   cartLogic() {
     checkoutCartBtn.addEventListener("click", () => {
+      var xhr = new XMLHttpRequest();
+      const uri = '/store_cart';
+      cart = Storage.getCart();
+      window.alert(cart);
+      xhr.open('POST', uri);
+      xhr.setRequestHeader("Content-Type", "application/jason");
+      xhr.onreadystatechange = function(){
+      if(this.status == 200 && this.readyState == 4){
+        state = xhr.response;
+      }
+    };
+      var data = JSON.stringify(cart);
+      xhr.send(data)
       this.checkout();
     });
     cartContent.addEventListener("click", event => {
@@ -184,8 +206,6 @@ class UI {
         let removeItem = event.target;
         let id = removeItem.dataset.id;
         cart = cart.filter(item => item.id !== id);
-        console.log(cart);
-
         this.setCartValues(cart);
         Storage.saveCart(cart);
         cartContent.removeChild(removeItem.parentElement.parentElement);
@@ -274,8 +294,6 @@ class Storage {
 
 
 function main() {
-  window.alert("main");
-  window.alert(data);
   const ui = new UI();
   const products = new Products();
   ui.setupAPP();
