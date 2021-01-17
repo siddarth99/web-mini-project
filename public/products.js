@@ -13,7 +13,7 @@ export default {
       sys: { id: "1" },
       fields: {
         title: "queen panel bed",
-        price: 10.99,
+        price: 10999,
         image: { fields: { file: { url: img1 } } }
       }
     },
@@ -21,7 +21,7 @@ export default {
       sys: { id: "2" },
       fields: {
         title: "king panel bed",
-        price: 12.99,
+        price: 12999,
         image: { fields: { file: { url: img2 } } }
       }
     },
@@ -29,7 +29,7 @@ export default {
       sys: { id: "3" },
       fields: {
         title: "single panel bed",
-        price: 12.99,
+        price: 12999,
         image: { fields: { file: { url: img3 } } }
       }
     },
@@ -37,7 +37,7 @@ export default {
       sys: { id: "4" },
       fields: {
         title: "twin panel bed",
-        price: 22.99,
+        price: 22999,
         image: { fields: { file: { url: img4 } } }
       }
     },
@@ -45,7 +45,7 @@ export default {
       sys: { id: "5" },
       fields: {
         title: "fridge",
-        price: 88.99,
+        price: 28999,
         image: { fields: { file: { url: img5 } } }
       }
     },
@@ -53,7 +53,7 @@ export default {
       sys: { id: "6" },
       fields: {
         title: "dresser",
-        price: 32.99,
+        price: 32999,
         image: { fields: { file: { url: img6 } } }
       }
     },
@@ -61,7 +61,7 @@ export default {
       sys: { id: "7" },
       fields: {
         title: "couch",
-        price: 45.99,
+        price: 45999,
         image: { fields: { file: { url: img7 } } }
       }
     },
@@ -69,7 +69,7 @@ export default {
       sys: { id: "8" },
       fields: {
         title: "table",
-        price: 33.99,
+        price: 33999,
         image: { fields: { file: { url: img8 } } }
       }
     }
