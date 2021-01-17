@@ -5,6 +5,7 @@ const app = express();
 var data = require('./products.json');
 const parser = require("body-parser");
 var firebase = require('firebase');
+var nodemailer = require('nodemailer');
 var cart = '';
 
 app.use(parser.urlencoded({ extended: false }));
@@ -49,13 +50,7 @@ app.post('/auth', function(req, res) {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
             console.log(cart);
-
-            firebase.database().ref('orders').child(firebase.auth().currentUser.uid).push({
-                email: email,
-                items: cart
-            });
-
-            res.sendFile(__dirname + "/public/index.html");
+            res.sendFile(__dirname + "/public/payment.html");
             // Signed in 
             // ...
         })
@@ -83,12 +78,7 @@ app.post('/signup', function(req, res) {
                 address: address
             });
 
-            firebase.database().ref('orders').child(firebase.auth().currentUser.uid).push({
-                email: email,
-                items: cart
-            });
-            console.log('signup success');
-            res.sendFile(__dirname + "/public/index.html");
+            res.sendFile(__dirname + "/public/payment.html");
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -97,6 +87,66 @@ app.post('/signup', function(req, res) {
             res.sendFile(__dirname + "/public/signup_error.html");
         });
 })
+
+app.post('/checkout', function(req, res) {
+    var name = req.body.firstname;
+    var email = req.body.email;
+    var address = req.body.address;
+    var city = req.body.city;
+    var state = req.body.state;
+    var pincode = req.body.zip;
+    var cardname = req.body.cardname;
+    var cardnumber = req.body.cardnumber;
+    var expmonth = req.body.expmonth;
+    var expyear = req.body.expyear;
+    var cvv = req.body.cvv;
+    firebase.database().ref('orders').push({
+        email: email,
+        items: cart,
+        name: name,
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode,
+        cardname: cardname,
+        cardnumber: cardnumber,
+        expmonth: expmonth,
+        expyear: expyear,
+        cvv: cvv
+    });
+
+    var orders = JSON.parse(cart);
+    var ordertext = ""
+    var i = 0;
+    orders.forEach(order => {
+        i++;
+        ordertext += ` ${i} ) ${order.title} - ${order.price}, quantity : ${order.amount} \n`
+    })
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'comfyhouse.contact@gmail.com',
+            pass: 'comfy@1234'
+        }
+    });
+
+    var mailOptions = {
+        from: 'comfyhouse.contact@gmail.com',
+        to: email,
+        subject: 'Order Successfully place!',
+
+        text: 'Congratulations ' + name + '!,\n\n\n Your payment was successfull and your order of' + ordertext + '\n will be delivered in 7 working days\n\n Thank You for trusting us. \n\nIn case of any queries or complaints please contact us at: comfyhouse.contact@gmail.com'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 app.use(express.static("public"));
 
