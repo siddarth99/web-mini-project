@@ -17,10 +17,10 @@ require("firebase/firestore");
 // Set the configuration for your app
 // TODO: Replace with your project's config object
 var config = {
-    apiKey: "************",
-    authDomain: "**************",
-    databaseURL: "***************",
-    storageBucket: "**************"
+    apiKey: "AIzaSyCzX8sKSTnJXEMCw_Q3MzJviP7Xr4U6kEI",
+    authDomain: "furniture-store-c3d57.firebaseapp.com",
+    databaseURL: "https://furniture-store-c3d57-default-rtdb.firebaseio.com/",
+    storageBucket: "furniture-store-c3d57.appspot.com"
 };
 
 firebase.initializeApp(config);
@@ -125,8 +125,8 @@ app.post('/checkout', function(req, res) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'comfyhouse*********',
-            pass: '*******'
+            user: 'comfyhouse.contact@gmail.com',
+            pass: 'comfy@1234'
         }
     });
 
@@ -135,7 +135,7 @@ app.post('/checkout', function(req, res) {
         to: email,
         subject: 'Order Successfully place!',
 
-        text: 'Congratulations ' + name + '!,\n\n\n Your payment was successfull and your order of' + ordertext + '\n will be delivered in 7 working days\n\n Thank You for trusting us. \n\nIn case of any queries or complaints please contact us at: comfyhouse.contact@gmail.com'
+        text: 'Congratulations ' + name + '!,\n\n\n Your payment was successful and your order of' + ordertext + '\n will be delivered in 7 working days\n\n Thank You for trusting us. \n\nIn case of any queries or complaints please contact us at: comfyhouse.contact@gmail.com'
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
@@ -161,7 +161,9 @@ app.get('/login.html', function(req, res) {
 });
 
 app.post('/signup.html', function(req, res) {
+    console.log('nnsns')
     res.sendFile(__dirname + '/public/signup.html');
+
 });
 
 

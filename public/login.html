@@ -28,11 +28,11 @@
                                     <div class="form-cover">
                                         <h4>Login Here</h4>
                                         <form action="/auth" method="POST">
-                                            <input placeholder="Enter email" id='email' name='email' type="text" class="form-control" data-error="Valid email is required." required='required'>
-                                            <input Placeholder="Enter password" id='password' name='password' type="password" class="form-control" data-error="Valid password is required." required='required'>
+                                            <input placeholder="Enter email" id='email' name='email' type="text" class="form-control">
+                                            <input Placeholder="Enter password" id='password' name='password' type="password" class="form-control">
                                             <div class="row forml-footer">
                                                 <div class="col-md-6 forget-paswd">
-                                                    <button action="./signup.html" class='btn btn-primary' id='signup_button' type="submit">No Account?</button>
+                                                    <button formaction="/signup.html" type="submit" formmethod="POST" class='btn btn-primary' id='signup_button'>No Account?</button>
                                                 </div>
                                                 <div class="col-md-6 button-div">
                                                     <button type="submit" class="btn btn-primary">Login</button>
